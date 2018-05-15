@@ -1,0 +1,31 @@
+<p data-bind='ifnot: waterMeters'><em>Loading...</em></p>
+
+<div class="home-block">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1 data-bind="visible: waterMeters().length != 0">Water meters</h1>
+            <h1 data-bind="visible: waterMeters().length == 0">Not registered any water-meters</h1>
+            <ul class="list-group" data-bind='foreach: waterMeters'>
+                <li class="list-group-item ">
+                    <span class="lead" title="serial number" data-bind="text: serialNumber"></span>
+                    <div class="pull-right">
+                        <span class="glyphicon glyphicon-scale" title="Set meter" data-bind="click:$parent.submitWaterMeter"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row" data-bind="visible: sbmtWaterMeter()">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>Submit water meter reading</h3>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Counter reading" autofocus
+                       data-bind="textInput: readingsWaterMeter, numeric: readingsWaterMeter" />
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-primary" data-bind="click:updateMeter">Submit</button>
+                <button class="btn btn-cancel" data-bind="click:sbmtWaterMeter(null)">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

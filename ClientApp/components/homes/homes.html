@@ -1,0 +1,69 @@
+<p data-bind='ifnot: homes'><em>Loading...</em></p>
+<div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1 data-bind="visible: homes().length != 0">Homes</h1>
+            <h1 data-bind="visible: homes().length == 0">No homes added</h1>
+            <ul class="list-group" data-bind='foreach: homes'>
+                <li class="list-group-item ">
+                    <span class="lead" title="address" data-bind="text: address"></span>
+                    <div class="pull-right">
+                        <span class="glyphicon glyphicon-scale" title="Set meter" data-bind="visible: waterMeter, click:$parent.submitWaterMeter"></span>
+                        <span class="glyphicon glyphicon-scale" style="color:red" title="Unreg meter" data-bind="visible: waterMeter, click:$parent.deleteWaterMeter"></span>
+                        <button class="btn btn-sm btn-secondary" data-bind="visible: !waterMeter, click:$parent.registerWaterMeter">Reg meter</button>
+                        <button class="btn btn-sm btn-warning" data-bind="click:$parent.editHome">Edit</button>
+                        <button class="btn btn-sm btn-danger" data-bind="click:$parent.removeHome">Delete</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row" data-bind="visible: !editableHome() && !regWaterMeter() && !sbmtWaterMeter()">
+        <div class="col-md-8 col-md-offset-2">
+            <h3 data-bind="">Add new home</h3>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Address home" autofocus data-bind='textInput: address' />
+            </div>
+            <button class="btn btn-success" data-bind="click:addHome">New home</button>
+        </div>
+    </div>
+    <div class="row" data-bind="visible: editableHome()">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>Edit home</h3>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Address home" autofocus
+                       data-bind="textInput: addressEditableHome" />
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-primary" data-bind="click:saveHome">Save home</button>
+                <button class="btn btn-cancel" data-bind="click:editableHome(null)">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <div class="row" data-bind="visible: regWaterMeter()">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>Register water meter</h3>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Serial number water meter" autofocus
+                       data-bind="textInput: serialNumberRegWaterMeter" />
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-primary" data-bind="click:addWaterMeter">Register</button>
+                <button class="btn btn-cancel" data-bind="click:regWaterMeter(null)">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <div class="row" data-bind="visible: sbmtWaterMeter()">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>Submit water meter reading</h3>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Counter reading" autofocus
+                       data-bind="value: readingsWaterMeter, numeric: readingsWaterMeter" />
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-primary" data-bind="click:updateMeter">Submit</button>
+                <button class="btn btn-cancel" data-bind="click:sbmtWaterMeter(null)">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

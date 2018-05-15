@@ -1,0 +1,18 @@
+
+<h1>Statistics block</h1>
+
+<div class="row">
+    <div class="col-md-6" data-bind="visible:idMin() != undefined">
+        <div class="pull-left">
+            <p>the house that consumed the most water:</p>
+            <label class="lead" title="address" data-bind="text: fullMax"></label>
+        </div>
+        <div class="pull-left">
+            <p>the house that consumed the less water:</p>
+            <label class="lead" title="address" data-bind="text: fullMin"></label>
+        </div>
+    </div>
+    <div class="col-md-6" data-bind="visible: idMin() == undefined">
+        <h3>Not registered any water-meters</h3>
+    </div>
+</div>
